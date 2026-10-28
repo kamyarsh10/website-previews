@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ancla Tattoo · Flash y diseño propio en Madrid</title>
+<meta name="description" content="Estudio de tatuaje en Madrid: flash de la semana a precio cerrado, calculadora de tamaño, zona y precio, y cita online." />
+<meta name="theme-color" content="#BE291F" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B26; --ink-2:#192A3B; --ink-3:#25394D;
+  --paper:#EEF0EA; --paper-2:#DFE4DA; --paper-3:#CFD6C9;
+  --red:#BE291F; --red-deep:#9C1F17;
+  --yellow:#F1B82D; --yellow-deep:#D99F14;
+  --green:#1F6B52; --green-deep:#175340;
+  --muted:#46525C;
+  --display:'Rozha One', Georgia, serif;
+  --sans:'Work Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --gutter:clamp(20px,4vw,56px);
+  --max:1320px;
+  --sec:clamp(80px,10vw,160px);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--sans);font-size:17px;line-height:1.55;background:var(--paper);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+ul,ol{list-style:none}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:100%;max-width:calc(var(--max) + var(--gutter)*2);margin:0 auto;padding:0 var(--gutter)}
+
+/* Section fields */
+.sec{padding:var(--sec) 0;position:relative}
+.on-red{background:var(--red);color:#fff}
+.on-ink{background:var(--ink);color:var(--paper)}
+.on-paper{background:var(--paper);color:var(--ink)}
+.on-yellow{background:var(--yellow);color:var(--ink)}
+.on-green{background:var(--green);color:var(--paper)}
+
+/* Type */
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.01em;text-wrap:balance}
+h1{font-size:clamp(38px,5.3vw,80px);line-height:1}
+h2{font-size:clamp(34px,4.3vw,62px);line-height:1.02}
+h3{font-size:clamp(22px,2vw,28px);line-height:1.1}
+.lead{font-size:clamp(18px,1.5vw,21px);line-height:1.5;max-width:44ch}
+.sec-head{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:end;margin-bottom:clamp(40px,5vw,72px)}
+.sec-head .lead{justify-self:end}
+
+/* Buttons: flat, square */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 26px;font-weight:600;font-size:16px;text-decoration:none;transition:transform .2s var(--ease),background-color .2s,color .2s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:var(--ink-3)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-yellow{background:var(--yellow);color:var(--ink)}
+.btn-yellow:hover{background:var(--yellow-deep)}
+.btn-paper{background:var(--paper);color:var(--ink)}
+.btn-paper:hover{background:var(--paper-3)}
+.link{font-weight:600;text-underline-offset:5px;text-decoration-thickness:2px;display:inline-flex;align-items:center;min-height:44px}
+.link:hover{text-decoration-thickness:4px}
+
+/* Chips (pickers) */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:46px;padding:0 18px;font-weight:600;font-size:15.5px;background:var(--chip-bg,var(--paper-2));color:var(--chip-ink,var(--ink));transition:background-color .15s,color .15s,transform .15s var(--ease)}
+.chip:hover{background:var(--chip-hover,var(--paper-3))}
+.chip[aria-pressed="true"],.chip[aria-checked="true"]{background:var(--chip-on-bg,var(--ink));color:var(--chip-on-ink,var(--paper))}
+.chip[aria-disabled="true"],.chip:disabled{opacity:.38;cursor:not-allowed;text-decoration:line-through}
+.chip:active{transform:scale(.97)}
+
+/* Header */
+.bar{position:sticky;top:0;z-index:50;background:var(--red);color:#fff}
+.bar-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.logo{font-family:var(--display);font-size:30px;text-decoration:none;line-height:1;display:flex;align-items:center;min-height:44px}
+.nav{display:flex;align-items:center;gap:clamp(14px,2.2vw,32px)}
+.nav a{font-weight:500;font-size:15.5px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
+.nav a:hover{text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}
+.nav .btn{min-height:44px;padding:0 20px;font-weight:600}
+.nav .btn:hover{text-decoration:none}
+.burger{display:none;min-width:48px;min-height:48px;align-items:center;justify-content:center;font-weight:600;color:#fff}
+
+/* Hero */
+.hero{padding:clamp(48px,6vw,96px) 0 clamp(56px,7vw,110px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:var(--gutter);align-items:center}
+.hero-copy h1{max-width:12ch}
+.hero-copy .lead{margin-top:28px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin-top:36px}
+.open-now{margin-top:32px;display:flex;align-items:center;gap:12px;font-weight:600;font-size:16px;min-height:44px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--yellow);flex:none}
+.dot.off{background:#fff;opacity:.55}
+.hero-photo{position:relative;margin:0}
+.hero-photo img.main{width:100%;aspect-ratio:4/5;object-fit:cover}
+.today{position:absolute;left:-28px;bottom:28px;width:clamp(160px,17vw,220px);background:var(--paper);color:var(--ink);transform:rotate(-3deg)}
+.today img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.today p{padding:12px 14px 14px;font-weight:600;font-size:15px;line-height:1.3}
+.today strong{display:block;font-family:var(--display);font-weight:400;font-size:22px;margin-bottom:2px}
+
+/* Flash wall */
+.wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,auto);gap:clamp(14px,1.8vw,24px)}
+.flash{background:var(--paper);color:var(--ink);display:flex;flex-direction:column;position:relative}
+.flash.big{grid-row:1/3;grid-column:1}
+.flash img{width:100%;object-fit:cover;aspect-ratio:4/3;flex:none}
+.flash.big img{aspect-ratio:auto;flex:1;min-height:340px}
+.flash-body{padding:20px 22px 22px;display:grid;gap:10px}
+.flash-body p{font-size:15.5px;color:var(--muted)}
+.price-row{display:flex;align-items:baseline;gap:10px;color:var(--ink)}
+.price-row strong{font-family:var(--display);font-weight:400;font-size:34px;line-height:1}
+.price-row span{font-weight:600;font-size:15px}
+.pips{display:flex;gap:4px;margin:2px 0}
+.pips i{flex:1;height:10px;background:var(--ink);max-width:22px}
+.pips i.gone{background:var(--paper-3)}
+.left{font-size:14.5px;font-weight:600;color:var(--ink)}
+.flash .btn{margin-top:6px;width:100%}
+.flash .btn[aria-pressed="true"]{background:var(--green);color:#fff}
+.flash.picked::after{content:"";position:absolute;inset:0;pointer-events:none;border:4px solid var(--yellow)}
+.js-anim .flash{opacity:0;transform:translateY(34px) rotate(var(--tilt,-2deg))}
+.js-anim .flash.in{opacity:1;transform:none;transition:opacity .6s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.wall-note{margin-top:28px;font-size:16px;max-width:60ch;color:var(--paper-3)}
+
+/* Styles */
+.styles-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--gutter);align-items:start}
+.tabs{display:grid;gap:10px}
+.tab{display:grid;grid-template-columns:76px 1fr;gap:16px;align-items:center;text-align:left;padding:10px;background:var(--paper-2);min-height:96px;transition:background-color .2s,color .2s}
+.tab img{width:76px;height:76px;object-fit:cover}
+.tab span{font-family:var(--display);font-size:24px;line-height:1.1}
+.tab:hover{background:var(--paper-3)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.style-view{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(20px,3vw,40px);align-items:stretch;background:var(--paper-2);padding:clamp(16px,2vw,28px)}
+.style-view img{width:100%;height:100%;min-height:380px;object-fit:cover}
+.style-text{display:flex;flex-direction:column;gap:18px;padding:6px 0}
+.style-text h3{font-size:clamp(30px,3vw,44px)}
+.style-text dl{display:grid;gap:14px}
+.style-text dt{font-weight:700;font-size:15.5px}
+.style-text dd{color:var(--muted);font-size:16.5px}
+.style-text .btn{align-self:flex-start;margin-top:auto}
+
+/* Planner */
+.plan{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:start}
+.ctl{margin-bottom:34px;--chip-bg:rgba(15,27,38,.1);--chip-hover:rgba(15,27,38,.18)}
+.ctl>h3{font-family:var(--sans);font-size:19px;font-weight:700;letter-spacing:0;margin-bottom:12px}
+.size-big{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.size-big output{font-family:var(--display);font-size:clamp(56px,7vw,92px);line-height:.9}
+.size-big span{font-weight:600;font-size:20px}
+input[type=range]{width:100%;height:44px;background:transparent;-webkit-appearance:none;appearance:none;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:10px;background:var(--ink)}
+input[type=range]::-moz-range-track{height:10px;background:var(--ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:44px;background:var(--red);border:4px solid var(--paper);margin-top:-17px}
+input[type=range]::-moz-range-thumb{width:22px;height:36px;background:var(--red);border:4px solid var(--paper);border-radius:0}
+.scale{display:grid;gap:14px;margin-top:20px}
+.srow{display:grid;gap:5px}
+.srow span{font-size:15px;font-weight:600}
+.srow b{display:block;height:16px;background:rgba(15,27,38,.34);transition:width .25s var(--ease)}
+.srow.tat b{background:var(--red);height:22px}
+.scale-cap{font-size:15px;margin-top:10px;font-weight:500}
+.ticket{background:var(--paper);color:var(--ink);padding:clamp(22px,2.4vw,34px);position:sticky;top:96px}
+.ticket h3{font-size:clamp(26px,2.4vw,34px)}
+.tk-price{font-family:var(--display);font-size:clamp(44px,4.4vw,64px);line-height:1;margin:18px 0 6px}
+.tk-sub{font-size:15px;color:var(--muted)}
+.tk-list{margin:22px 0 24px;display:grid;gap:0}
+.tk-list li{display:flex;justify-content:space-between;gap:16px;padding:11px 12px;font-size:16px}
+.tk-list li:nth-child(odd){background:var(--paper-2)}
+.tk-list li span:first-child{font-weight:600}
+.tk-list li span:last-child{text-align:right}
+.pain{display:inline-flex;gap:4px;vertical-align:middle;margin-right:8px}
+.pain i{width:12px;height:16px;background:var(--paper-3)}
+.pain i.on{background:var(--red)}
+.ticket .btn{width:100%}
+.ticket small{display:block;margin-top:14px;font-size:14px;color:var(--muted)}
+
+/* First time */
+.first{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:stretch}
+.first-photo{position:relative;min-height:420px}
+.first-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.steps{display:grid;gap:0}
+.steps li{display:grid;grid-template-columns:minmax(0,170px) minmax(0,1fr);gap:20px;padding:24px;align-items:baseline}
+.steps li:nth-child(even){background:var(--green-deep)}
+.steps h3{font-size:clamp(24px,2.3vw,32px)}
+.steps p{font-size:17px;max-width:46ch}
+
+/* Artists */
+.artist{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,64px);align-items:center;margin-bottom:clamp(36px,5vw,72px)}
+.artist:nth-child(even){grid-template-columns:minmax(0,7fr) minmax(0,5fr)}
+.artist:nth-child(even) .artist-photo{order:2}
+.artist:last-child{margin-bottom:0}
+.artist-photo img{width:100%;aspect-ratio:5/4;object-fit:cover}
+.artist-info{display:grid;gap:16px;justify-items:start}
+.artist-info h3{font-size:clamp(34px,3.6vw,52px)}
+.artist-info p{max-width:46ch;color:var(--muted);font-size:17px}
+.artist-meta{display:flex;flex-wrap:wrap;gap:8px}
+.tag{padding:7px 14px;background:var(--paper-2);font-weight:600;font-size:14.5px}
+.slot{font-weight:600;display:flex;align-items:center;gap:10px}
+.slot .dot{background:var(--green)}
+.artist-act{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+
+/* Care */
+.care{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:start}
+.care-day{font-family:var(--display);font-size:clamp(80px,12vw,180px);line-height:.88;margin:12px 0 10px}
+.care-phase{font-family:var(--display);font-size:clamp(26px,2.6vw,38px);line-height:1.1;color:var(--yellow);max-width:16ch}
+.care-ctl{margin-top:34px;--chip-bg:var(--ink-2);--chip-hover:var(--ink-3);--chip-ink:var(--paper);--chip-on-bg:var(--yellow);--chip-on-ink:var(--ink)}
+.care input[type=range]::-webkit-slider-runnable-track{background:var(--ink-3)}
+.care input[type=range]::-moz-range-track{background:var(--ink-3)}
+.care input[type=range]::-webkit-slider-thumb{background:var(--yellow);border-color:var(--ink)}
+.care input[type=range]::-moz-range-thumb{background:var(--yellow);border-color:var(--ink)}
+.care-ctl .chips{margin-top:8px}
+.care-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.care-box{padding:26px;background:var(--ink-2);min-height:260px}
+.care-box.do{background:var(--green)}
+.care-box h3{font-size:28px;margin-bottom:14px}
+.care-box li{padding:9px 0 9px 24px;position:relative;font-size:16.5px}
+.care-box li::before{content:"";position:absolute;left:0;top:19px;width:10px;height:10px;background:currentColor}
+.care-box.dont li::before{background:var(--red)}
+.care-note{margin-top:20px;font-size:15.5px;color:var(--paper-3);max-width:62ch}
+
+/* Booking */
+.book{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4vw,72px);align-items:start}
+.book-side{position:sticky;top:96px}
+.book-side h2{margin-bottom:22px}
+.book-side .lead{margin-bottom:28px}
+.brief{background:var(--red-deep);padding:22px 24px;margin:0 0 26px}
+.brief h3{font-size:24px;margin-bottom:10px}
+.brief p{font-size:16.5px;line-height:1.45}
+.deposit{font-size:16px;max-width:42ch;margin-bottom:26px}
+.call{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px}
+.call a.num{font-family:var(--display);font-size:30px;text-decoration:none;min-height:44px;display:inline-flex;align-items:center}
+.form{background:var(--paper);color:var(--ink);padding:clamp(22px,3vw,44px);display:grid;gap:28px;--chip-bg:var(--paper-2)}
+.fgroup>legend,.fgroup>label,.flabel{font-weight:700;font-size:16.5px;margin-bottom:10px;display:block;padding:0}
+fieldset{border:0;min-width:0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.input{width:100%;min-height:52px;padding:12px 14px;background:var(--paper-2);border:0;border-bottom:3px solid var(--ink);font-size:17px;border-radius:0}
+.input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+textarea.input{min-height:110px;resize:vertical}
+select.input{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 22px) 55%,calc(100% - 16px) 55%;background-size:6px 6px;background-repeat:no-repeat;padding-right:44px;text-overflow:ellipsis}
+::placeholder{color:var(--muted);opacity:1}
+.hint{font-size:14.5px;color:var(--muted);margin-top:8px}
+.days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.days .chip{display:grid;gap:0;padding:8px 6px;line-height:1.15;text-align:center;min-height:62px}
+.days .chip small{font-size:13.5px;font-weight:500;opacity:.85}
+.days .chip b{font-size:19px}
+.times{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.check{display:flex;gap:14px;align-items:flex-start;min-height:48px;cursor:pointer;padding:6px 0}
+.check input{width:28px;height:28px;margin-top:0;cursor:pointer;accent-color:var(--red);flex:none}
+.err{color:var(--red-deep);font-weight:600;font-size:15.5px;min-height:1.4em}
+.form .btn{width:100%;min-height:58px;font-size:18px}
+.fgroup>label.file-btn{display:inline-flex;align-items:center;cursor:pointer;margin-bottom:0}
+input.sr:focus-visible+.file-btn{outline:3px solid var(--ink);outline-offset:3px}
+.files-list{margin-top:8px;font-size:14.5px;font-weight:600}
+.done{background:var(--paper);color:var(--ink);padding:clamp(28px,4vw,56px);display:grid;gap:18px;justify-items:start}
+.done h3{font-size:clamp(30px,3.2vw,46px)}
+.done[hidden],.form[hidden]{display:none}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:var(--gutter);align-items:start}
+.faq-grid h2{position:sticky;top:100px}
+.faq-grid .lead{margin-top:18px;color:var(--muted)}
+details{background:var(--paper-2);margin-bottom:10px}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:20px 24px;min-height:64px;font-weight:700;font-size:18px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--display);font-size:32px;line-height:1;flex:none;transition:transform .25s var(--ease)}
+details[open]{background:var(--yellow)}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 24px 24px;max-width:62ch;font-size:17px}
+
+/* Visit + footer */
+.visit{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,5vw,80px);align-items:stretch}
+.visit h2{margin-bottom:28px}
+.hours{width:100%;border-collapse:collapse;margin:8px 0 26px;font-size:17px}
+.hours th,.hours td{padding:12px 14px;text-align:left;font-weight:500}
+.hours tr:nth-child(odd){background:var(--ink-2)}
+.hours th{font-weight:700}
+.hours tr.today-row{background:var(--yellow);color:var(--ink)}
+.hours tr.today-row th,.hours tr.today-row td{font-weight:700}
+.addr{font-size:19px;margin-bottom:22px;font-style:normal}
+.visit-act{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:6px}
+.visit-photo{position:relative;min-height:420px}
+.visit-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.foot{background:var(--ink);color:var(--paper);padding:0 0 28px;overflow:hidden}
+.foot-word{font-family:var(--display);font-size:min(33.5vw,495px);line-height:.9;letter-spacing:-.02em;color:var(--red);margin:clamp(40px,6vw,90px) 0 0;white-space:nowrap}
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 26px;padding:34px 0 26px}
+.foot-links a{display:inline-flex;align-items:center;min-height:44px;font-weight:500;text-underline-offset:5px}
+.demo-disclaimer{max-width:760px;font-size:13.5px;line-height:1.5;color:var(--paper-3)}
+
+/* Project bar */
+.pbar{position:fixed;left:50%;bottom:16px;transform:translate(-50%,140%);z-index:60;width:min(780px,calc(100% - 24px));background:var(--ink);color:var(--paper);display:flex;align-items:center;gap:14px;padding:12px 14px 12px 22px;transition:transform .4s var(--ease);box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.pbar.show{transform:translate(-50%,0)}
+.pbar p{flex:1;font-size:15.5px;line-height:1.3;min-width:0}
+.pbar strong{display:block;font-family:var(--display);font-weight:400;font-size:20px}
+.pbar .x{min-width:44px;min-height:44px;font-weight:600;color:var(--paper-3);text-decoration:underline;text-underline-offset:4px}
+.pbar .btn{min-height:46px}
+body.has-pbar{padding-bottom:96px}
+
+.toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-30px);background:var(--ink);color:var(--paper);padding:14px 22px;font-weight:600;z-index:80;opacity:0;pointer-events:none;transition:opacity .25s,transform .3s var(--ease)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Hero entrance (one orchestrated moment) */
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes drop{from{opacity:0;transform:translateY(-40px) rotate(6deg)}to{opacity:1;transform:rotate(-3deg)}}
+.hero-copy>*{animation:rise .8s var(--ease) both}
+.hero-copy>*:nth-child(2){animation-delay:.1s}
+.hero-copy>*:nth-child(3){animation-delay:.2s}
+.hero-copy>*:nth-child(4){animation-delay:.3s}
+.hero-photo img.main{animation:rise 1s var(--ease) .15s both}
+.today{animation:drop .9s var(--ease) .7s both}
+
+/* Responsive */
+@media (max-width:1023px){
+  .nav a:not(.btn){display:none}
+  .burger{display:inline-flex}
+  .nav.open{position:absolute;left:0;right:0;top:72px;background:var(--red);flex-direction:column;align-items:stretch;padding:8px var(--gutter) 24px;gap:0}
+  .nav.open a:not(.btn){display:flex;min-height:54px;font-size:18px}
+  .sec-head,.hero-grid,.styles-grid,.plan,.first,.care,.book,.faq-grid,.visit{grid-template-columns:minmax(0,1fr)}
+  .sec-head .lead{justify-self:start}
+  .hero-copy h1{max-width:none}
+  .hero-photo{max-width:560px}
+  .today{left:12px}
+  .wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flash.big{grid-row:auto;grid-column:1/3}
+  .flash.big img{aspect-ratio:16/10;min-height:0}
+  .tabs{grid-auto-flow:column;grid-auto-columns:minmax(210px,1fr);overflow-x:auto;padding-bottom:6px;scroll-snap-type:x proximity}
+  .tab{scroll-snap-align:start}
+  .style-view{grid-template-columns:minmax(0,1fr)}
+  .style-view img{min-height:280px;height:auto;aspect-ratio:4/3}
+  .ticket{position:static}
+  .first-photo{min-height:340px}
+  .artist,.artist:nth-child(even){grid-template-columns:minmax(0,1fr)}
+  .artist:nth-child(even) .artist-photo{order:0}
+  .faq-grid h2{position:static}
+  .book-side{position:static}
+  .visit-photo{min-height:320px;order:-1}
+}
+@media (max-width:639px){
+  body{font-size:16.5px}
+  h1{font-size:8.6vw}
+  .bar-in{height:64px}
+  .nav.open{top:64px}
+  .nav .btn{display:none}
+  .nav.open .btn{display:inline-flex;margin-top:8px}
+  .wall{grid-template-columns:minmax(0,1fr)}
+  .flash.big{grid-column:auto}
+  .steps li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .care-cols{grid-template-columns:minmax(0,1fr)}
+  .grid2{grid-template-columns:minmax(0,1fr)}
+  .pbar{padding:10px 10px 10px 16px;gap:8px}
+  .pbar .x{display:none}
+  .pbar .btn{padding:0 16px}
+  .hero-actions .btn{width:100%}
+  .today{left:8px;bottom:-24px}
+  .hero{padding-bottom:80px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .js-anim .flash{opacity:1;transform:none}
+  .today{transform:rotate(-3deg)}
+}
+</style>
+</head>
+<body id="top">
+<a class="sr" href="#flash">Saltar al contenido</a>
+
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="logo" href="#top" aria-label="Ancla Tattoo, inicio">Ancla</a>
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a href="#flash">Flash</a>
+      <a href="#estilos">Estilos</a>
+      <a href="#tu-tatuaje">Tu tatuaje</a>
+      <a href="#artistas">Artistas</a>
+      <a href="#cuidados">Cuidados</a>
+      <a href="#visitanos">Visítanos</a>
+      <a class="btn btn-ink" href="#reserva">Pedir cita</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="nav">Menú</button>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="sec hero on-red" aria-labelledby="h-hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="h-hero">Elige tu flash o diseña el tuyo</h1>
+      <p class="lead">Estudio de tatuaje en Madrid. Mira el flash de la semana, calcula cuánto cuesta tu pieza y pide cita en un minuto.</p>
+      <div class="hero-actions">
+        <a class="btn btn-ink" href="#flash">Ver el flash de la semana</a>
+        <a class="link" href="#tu-tatuaje">Calcular mi tatuaje</a>
+      </div>
+      <p class="open-now" id="openNow"><span class="dot off" aria-hidden="true"></span><span id="openNowText">Martes a sábado, 11:00 a 20:00</span></p>
+    </div>
+    <figure class="hero-photo">
+      <img class="main" src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=900&h=1125&q=78&auto=format&fit=crop" alt="Manos con guantes blancos tatuando un antebrazo con una manga oscura" width="900" height="1125" />
+      <div class="today">
+        <img src="https://images.unsplash.com/photo-1711112109420-ecf9be11abb7?w=440&h=440&q=78&auto=format&fit=crop" alt="Tarjeta con una rosa dibujada, un flash de ejemplo" width="440" height="440" />
+        <p><strong>Flash de hoy</strong>Rosas y corazones, 120 €</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- FLASH WALL -->
+<section class="sec on-ink" id="flash" aria-labelledby="h-flash">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-flash">El flash de esta semana</h2>
+      <p class="lead">Diseños ya dibujados, a precio cerrado. Cada uno se tatúa una sola vez y se lo lleva quien llegue primero.</p>
+    </div>
+
+    <div class="wall" id="wall">
+      <article class="flash big" data-key="trad" data-name="Tradicional" data-price="150" data-size="hasta 12 cm" style="--tilt:-2deg">
+        <img src="https://images.unsplash.com/photo-1521308452854-e037c0062a1e?w=800&h=1000&q=78&auto=format&fit=crop" alt="Diseños de flash tradicional: calavera, rosas, corazones y cintas" width="800" height="1000" loading="lazy" />
+        <div class="flash-body">
+          <h3>Tradicional</h3>
+          <p>Calaveras, rosas, corazones y cintas. Línea gruesa y color plano.</p>
+          <div class="price-row"><strong>150 €</strong><span>hasta 12 cm</span></div>
+          <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i></div>
+          <p class="left">Quedan 4 de 8</p>
+          <button class="btn btn-red" type="button" aria-pressed="false">Apuntarme a este flash</button>
+        </div>
+      </article>
+
+      <article class="flash" data-key="mini" data-name="Mini flash" data-price="60" data-size="hasta 5 cm" style="--tilt:2deg;--d:.08s">
+        <img src="https://images.unsplash.com/photo-1753260814170-9f77d48c016e?w=700&h=525&q=78&auto=format&fit=crop" alt="Hoja de flash con símbolos pequeños de línea fina siendo recortada con tijeras" width="700" height="525" loading="lazy" />
+        <div class="flash-body">
+          <h3>Mini flash</h3>
+          <p>Símbolos pequeños: ojos, soles, plantas. Ideal para un primer tatuaje.</p>
+          <div class="price-row"><strong>60 €</strong><span>hasta 5 cm</span></div>
+          <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i></div>
+          <p class="left">Quedan 7 de 12</p>
+          <button class="btn btn-red" type="button" aria-pressed="false">Apuntarme a este flash</button>
+        </div>
+      </article>
+
+      <article class="flash" data-key="pared" data-name="Pared de la semana" data-price="90" data-size="hasta 8 cm" style="--tilt:-1.5deg;--d:.16s">
+        <img src="https://images.unsplash.com/photo-1681740230884-0dd41960c03c?w=700&h=525&q=78&auto=format&fit=crop" alt="Pared con plantillas de flash recortadas y marcadas con pegatinas de colores" width="700" height="525" loading="lazy" />
+        <div class="flash-body">
+          <h3>La pared</h3>
+          <p>Mariposas, gatos, llaves y retratos: los favoritos que cuelgan en el estudio.</p>
+          <div class="price-row"><strong>90 €</strong><span>hasta 8 cm</span></div>
+          <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i><i class="gone"></i></div>
+          <p class="left">Quedan 5 de 10</p>
+          <button class="btn btn-red" type="button" aria-pressed="false">Apuntarme a este flash</button>
+        </div>
+      </article>
+
+      <article class="flash" data-key="rosas" data-name="Rosas y corazones" data-price="120" data-size="hasta 10 cm" style="--tilt:2deg;--d:.24s">
+        <img src="https://images.unsplash.com/photo-1711112109420-ecf9be11abb7?w=700&h=525&q=78&auto=format&fit=crop" alt="Tarjeta con una rosa dibujada en negro sobre fondo lila" width="700" height="525" loading="lazy" />
+        <div class="flash-body">
+          <h3>Rosas y corazones</h3>
+          <p>Neotradicional: más detalle y sombra que el tradicional, con toques de color.</p>
+          <div class="price-row"><strong>120 €</strong><span>hasta 10 cm</span></div>
+          <div class="pips" aria-hidden="true"><i></i><i></i><i></i><i class="gone"></i><i class="gone"></i><i class="gone"></i></div>
+          <p class="left">Quedan 3 de 6</p>
+          <button class="btn btn-red" type="button" aria-pressed="false">Apuntarme a este flash</button>
+        </div>
+      </article>
+
+      <article class="flash" data-key="grandes" data-name="Pliegos grandes" data-price="260" data-size="hasta 20 cm" style="--tilt:-2deg;--d:.32s">
+        <img src="https://images.unsplash.com/photo-1769485016772-c5a4234a6be3?w=700&h=525&q=78&auto=format&fit=crop" alt="Dibujos grandes de flash extendidos sobre una mesa de madera" width="700" height="525" loading="lazy" />
+        <div class="flash-body">
+          <h3>Pliegos grandes</h3>
+          <p>Piezas de brazo, muslo o espalda dibujadas y listas para tatuar.</p>
+          <div class="price-row"><strong>260 €</strong><span>hasta 20 cm</span></div>
+          <div class="pips" aria-hidden="true"><i></i><i></i><i class="gone"></i><i class="gone"></i></div>
+          <p class="left">Quedan 2 de 4</p>
+          <button class="btn btn-red" type="button" aria-pressed="false">Apuntarme a este flash</button>
+        </div>
+      </article>
+    </div>
+    <p class="wall-note">Los jueves y sábados, de 16:00 a 20:00, tatuamos flash sin cita. El resto de días, apúntate aquí y te guardamos el hueco.</p>
+  </div>
+</section>
+
+<!-- STYLES -->
+<section class="sec on-paper" id="estilos" aria-labelledby="h-estilos">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-estilos">¿Qué estilo va contigo?</h2>
+      <p class="lead">Cada artista del estudio tiene el suyo. Toca uno y mira cómo es, cómo cura y quién lo hace.</p>
+    </div>
+    <div class="styles-grid">
+      <div class="tabs" role="tablist" aria-label="Estilos de tatuaje" id="styleTabs">
+        <button class="tab" role="tab" type="button" data-s="fina" aria-selected="true"><img src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?w=160&h=160&q=70&auto=format&fit=crop" alt="" width="76" height="76" loading="lazy" /><span>Línea fina</span></button>
+        <button class="tab" role="tab" type="button" data-s="trad" aria-selected="false" tabindex="-1"><img src="https://images.unsplash.com/photo-1479767574301-a01c78234a0c?w=160&h=160&q=70&auto=format&fit=crop" alt="" width="76" height="76" loading="lazy" /><span>Tradicional</span></button>
+        <button class="tab" role="tab" type="button" data-s="black" aria-selected="false" tabindex="-1"><img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?w=160&h=160&q=70&auto=format&fit=crop" alt="" width="76" height="76" loading="lazy" /><span>Blackwork</span></button>
+        <button class="tab" role="tab" type="button" data-s="lett" aria-selected="false" tabindex="-1"><img src="https://images.unsplash.com/photo-1666735660740-1753179a2dc4?w=160&h=160&q=70&auto=format&fit=crop" alt="" width="76" height="76" loading="lazy" /><span>Lettering</span></button>
+        <button class="tab" role="tab" type="button" data-s="ilus" aria-selected="false" tabindex="-1"><img src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?w=160&h=160&q=70&auto=format&fit=crop" alt="" width="76" height="76" loading="lazy" /><span>Ilustrativo</span></button>
+      </div>
+      <div class="style-view" id="styleView" role="tabpanel" aria-live="polite">
+        <img id="svImg" src="https://images.unsplash.com/photo-1562962230-16e4623d36e6?w=900&h=900&q=78&auto=format&fit=crop" alt="Antebrazo con una peonía tatuada en línea fina" width="900" height="900" loading="lazy" />
+        <div class="style-text">
+          <h3 id="svName">Línea fina</h3>
+          <p id="svText">Trazos delgados y detalles pequeños: flores, letras, símbolos. Queda elegante en tamaños pequeños.</p>
+          <dl>
+            <div><dt>Va bien para</dt><dd id="svFor">Primeros tatuajes, muñeca, antebrazo y tobillo.</dd></div>
+            <div><dt>Cuidado extra</dt><dd id="svCare">Protégelo del sol: la línea fina se desdibuja antes si se quema.</dd></div>
+            <div><dt>Lo hace</dt><dd id="svWho">Lucía</dd></div>
+          </dl>
+          <a class="btn btn-red" href="#tu-tatuaje" id="svGo">Calcular un tatuaje así</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANNER -->
+<section class="sec on-yellow" id="tu-tatuaje" aria-labelledby="h-plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-plan">Calcula tu tatuaje</h2>
+      <p class="lead">Elige estilo, zona y tamaño. Verás cuánto cuesta, cuánto tarda y cuánto duele antes de pedir cita.</p>
+    </div>
+    <div class="plan">
+      <div>
+        <div class="ctl">
+          <h3 id="lb-style">Estilo</h3>
+          <div class="chips" role="radiogroup" aria-labelledby="lb-style" id="pStyle"></div>
+        </div>
+        <div class="ctl">
+          <h3 id="lb-zone">Zona del cuerpo</h3>
+          <div class="chips" role="radiogroup" aria-labelledby="lb-zone" id="pZone"></div>
+        </div>
+        <div class="ctl">
+          <h3><label for="pSize">Tamaño</label></h3>
+          <div class="size-big"><output id="pSizeOut" for="pSize">10</output><span>cm</span></div>
+          <input type="range" id="pSize" min="2" max="30" step="1" value="10" aria-describedby="scaleCap" />
+          <div class="scale" id="scale" aria-hidden="true">
+            <div class="srow tat"><span id="lTat"></span><b id="rTat"></b></div>
+            <div class="srow"><span id="lMobile"></span><b id="rMobile"></b></div>
+            <div class="srow"><span id="lCard"></span><b id="rCard"></b></div>
+            <div class="srow"><span id="lCoin"></span><b id="rCoin"></b></div>
+          </div>
+          <p class="scale-cap" id="scaleCap"></p>
+        </div>
+      </div>
+
+      <aside class="ticket" aria-live="polite" aria-label="Resumen de tu tatuaje">
+        <h3>Tu tatuaje</h3>
+        <p class="tk-price" id="tkPrice">110 a 145 €</p>
+        <p class="tk-sub">Precio orientativo. El precio cerrado te lo damos en la consulta, que es gratis.</p>
+        <ul class="tk-list">
+          <li><span>Estilo</span><span id="tkStyle">Línea fina</span></li>
+          <li><span>Zona</span><span id="tkZone">Antebrazo</span></li>
+          <li><span>Tamaño</span><span id="tkSize">10 cm</span></li>
+          <li><span>Duración</span><span id="tkTime">1 h 30 min</span></li>
+          <li><span>Sesiones</span><span id="tkSess">1 sesión</span></li>
+          <li><span>Dolor</span><span id="tkPain"></span></li>
+          <li><span>Curación</span><span id="tkHeal">2 a 3 semanas</span></li>
+        </ul>
+        <button class="btn btn-red" type="button" id="tkAdd">Añadir a mi cita</button>
+        <small id="tkNote"></small>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST TIME -->
+<section class="sec on-green" id="primera-vez" aria-labelledby="h-first">
+  <div class="wrap first">
+    <div class="first-photo">
+      <img src="https://images.unsplash.com/photo-1761276297612-f1a149dbdc1e?w=900&h=1100&q=78&auto=format&fit=crop" alt="Artista dibujando la plantilla de un tatuaje sobre el pecho de un cliente" width="900" height="1100" loading="lazy" />
+    </div>
+    <div>
+      <h2 id="h-first">Así es tu primera vez</h2>
+      <ol class="steps" style="margin-top:36px">
+        <li><h3>Primero</h3><p>Nos cuentas la idea, por teléfono o en el estudio. La consulta dura 20 minutos y es gratis.</p></li>
+        <li><h3>Después</h3><p>Dibujamos tu diseño y te lo enseñamos antes del día de la cita. Puedes pedir los cambios que quieras.</p></li>
+        <li><h3>Ese día</h3><p>Colocamos la plantilla en tu piel y tú decides dónde queda mejor. Todo el material es estéril y de un solo uso.</p></li>
+        <li><h3>Al final</h3><p>Te damos las instrucciones de cuidado por escrito y revisamos cómo ha curado a los dos meses, sin coste.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ARTISTS -->
+<section class="sec on-paper" id="artistas" aria-labelledby="h-art">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 id="h-art">Conoce a los artistas</h2>
+      <p class="lead">Elige a quien mejor hace lo que buscas. Si dudas, te lo recomendamos en la consulta.</p>
+    </div>
+
+    <article class="artist" data-name="Lucía">
+      <div class="artist-photo"><img src="https://images.unsplash.com/photo-1597852075234-fd721ac361d3?w=900&h=720&q=78&auto=format&fit=crop" alt="Brazo con un tatuaje de línea fina de trazo delicado" width="900" height="720" loading="lazy" /></div>
+      <div class="artist-info">
+        <h3>Lucía</h3>
+        <p>Dibuja con trazo fino y mucha paciencia: flores, animales pequeños y letras. Muchos de sus clientes vienen a por su primer tatuaje.</p>
+        <div class="artist-meta"><span class="tag">Línea fina</span><span class="tag">Lettering</span><span class="tag">Minimalista</span></div>
+        <p class="slot"><span class="dot" aria-hidden="true"></span>Primer hueco: en 6 días</p>
+        <div class="artist-act">
+          <button class="btn btn-red js-pick-artist" type="button" data-artist="Lucía">Pedir cita con Lucía</button>
+          <a class="link" href="https://www.instagram.com/kamyar._.sh/" target="_blank" rel="noopener">Ver su Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="artist" data-name="Marcos">
+      <div class="artist-photo"><img src="https://images.unsplash.com/photo-1564426622559-5af68da63b96?w=900&h=720&q=78&auto=format&fit=crop" alt="Tatuador con guantes negros trabajando un dibujo sobre un brazo" width="900" height="720" loading="lazy" /></div>
+      <div class="artist-info">
+        <h3>Marcos</h3>
+        <p>Tradicional de los de siempre: contorno grueso, color plano y diseños que aguantan décadas. Es quien más flash dibuja para la pared.</p>
+        <div class="artist-meta"><span class="tag">Tradicional</span><span class="tag">Neotradicional</span><span class="tag">Flash</span></div>
+        <p class="slot"><span class="dot" aria-hidden="true"></span>Primer hueco: en 3 días</p>
+        <div class="artist-act">
+          <button class="btn btn-red js-pick-artist" type="button" data-artist="Marcos">Pedir cita con Marcos</button>
+          <a class="link" href="https://www.instagram.com/kamyar._.sh/" target="_blank" rel="noopener">Ver su Instagram</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="artist" data-name="Inés">
+      <div class="artist-photo"><img src="https://images.unsplash.com/photo-1537209383625-19584677a4d3?w=900&h=720&q=78&auto=format&fit=crop" alt="Persona tatuada pintando a mano un diseño en blanco y negro sobre papel" width="900" height="720" loading="lazy" /></div>
+      <div class="artist-info">
+        <h3>Inés</h3>
+        <p>Piezas grandes en negro y gris: mangas, espalda y diseños con sombra. Dibuja cada proyecto a mano y lo ajusta a tu cuerpo.</p>
+        <div class="artist-meta"><span class="tag">Blackwork</span><span class="tag">Ilustrativo</span><span class="tag">Piezas grandes</span></div>
+        <p class="slot"><span class="dot" aria-hidden="true"></span>Primer hueco: en 12 días</p>
+        <div class="artist-act">
+          <button class="btn btn-red js-pick-artist" type="button" data-artist="Inés">Pedir cita con Inés</button>
+          <a class="link" href="https://www.instagram.com/kamyar._.sh/" target="_blank" rel="noopener">Ver su Instagram</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CARE -->
+<section class="sec on-ink" id="cuidados" aria-labelledby="h-care">
+  <div class="wrap care">
+    <div>
+      <h2 id="h-care">Cómo cura tu tatuaje</h2>
+      <p class="care-day" id="careDay" aria-live="polite">Día 0</p>
+      <p class="care-phase" id="carePhase">El día del tatuaje</p>
+      <div class="care-ctl">
+        <label class="sr" for="careRange">Día desde el tatuaje</label>
+        <input type="range" id="careRange" min="0" max="30" step="1" value="0" />
+        <div class="chips" id="careChips" role="group" aria-label="Saltar a una fase"></div>
+      </div>
+    </div>
+    <div>
+      <div class="care-cols">
+        <div class="care-box do"><h3>Haz</h3><ul id="careDo"></ul></div>
+        <div class="care-box dont"><h3>Evita</h3><ul id="careDont"></ul></div>
+      </div>
+      <p class="care-note">Es una guía general. Cada piel es distinta: sigue siempre las instrucciones escritas que te dé tu tatuador. Si ves mucho enrojecimiento, pus o fiebre, consulta con un médico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="sec on-red" id="reserva" aria-labelledby="h-book">
+  <div class="wrap book">
+    <div class="book-side">
+      <h2 id="h-book">Pide tu cita</h2>
+      <p class="lead">Cuéntanos qué quieres y elige un día. Te escribimos para confirmar la hora.</p>
+      <div class="brief" id="brief">
+        <h3>Tu cita hasta ahora</h3>
+        <p id="briefText">Todavía no has elegido nada. Puedes apuntarte a un flash, calcular tu tatuaje o pedir una consulta gratis.</p>
+      </div>
+      <p class="deposit">Para guardar el hueco pedimos una señal de 30 €, que se descuenta del precio final.</p>
+      <div class="call">
+        <a class="num js-call" href="tel:+34910000000" data-number="+34 910 000 000">+34 910 000 000</a>
+        <button class="btn btn-ink js-copy-num" type="button" hidden>Copiar número</button>
+      </div>
+    </div>
+
+    <form class="form" id="form" novalidate>
+      <fieldset class="fgroup">
+        <legend>¿Qué necesitas?</legend>
+        <div class="chips" role="radiogroup" aria-label="Tipo de cita" id="fType">
+          <button type="button" class="chip" role="radio" aria-checked="true" data-v="flash">Un flash</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-v="custom">Diseño propio</button>
+          <button type="button" class="chip" role="radio" aria-checked="false" data-v="consulta">Consulta gratis</button>
+        </div>
+      </fieldset>
+
+      <div class="fgroup">
+        <label for="fArtist">Artista</label>
+        <select class="input" id="fArtist">
+          <option value="Cualquiera">Cualquiera, que me recomienden</option>
+          <option value="Lucía">Lucía, línea fina</option>
+          <option value="Marcos">Marcos, tradicional</option>
+          <option value="Inés">Inés, blackwork</option>
+        </select>
+      </div>
+
+      <fieldset class="fgroup">
+        <legend>Día</legend>
+        <div class="days" id="fDays" role="radiogroup" aria-label="Día de la cita"></div>
+        <p class="hint">Cerramos domingos y lunes.</p>
+      </fieldset>
+
+      <fieldset class="fgroup">
+        <legend>Hora</legend>
+        <div class="times" id="fTimes" role="radiogroup" aria-label="Hora de la cita"></div>
+      </fieldset>
+
+      <div class="grid2">
+        <div class="fgroup"><label for="fName">Nombre</label><input class="input" id="fName" type="text" autocomplete="name" required /></div>
+        <div class="fgroup"><label for="fPhone">Teléfono</label><input class="input" id="fPhone" type="tel" autocomplete="tel" inputmode="tel" placeholder="600 000 000" required /></div>
+      </div>
+
+      <div class="fgroup">
+        <label for="fIdea">Tu idea</label>
+        <textarea class="input" id="fIdea" rows="3" placeholder="Por ejemplo: una rama de olivo en el antebrazo, unos 10 cm."></textarea>
+      </div>
+
+      <div class="fgroup">
+        <span class="flabel">Imágenes de referencia</span>
+        <input class="sr" id="fFiles" type="file" accept="image/*" multiple aria-describedby="fFilesHint" />
+        <label class="chip file-btn" for="fFiles">Elegir imágenes</label>
+        <p class="hint" id="fFilesHint">Opcional. JPG o PNG. En este ejemplo las imágenes no se envían.</p>
+        <p class="files-list" id="fFilesList"></p>
+      </div>
+
+      <label class="check" for="fAge">
+        <input type="checkbox" id="fAge" />
+        <span>Tengo 18 años o más. Si eres menor, solo tatuamos con la presencia de tu madre, padre o tutor.</span>
+      </label>
+
+      <p class="err" id="fErr" role="alert"></p>
+      <button class="btn btn-red" type="submit">Pedir cita</button>
+    </form>
+
+    <div class="done" id="done" hidden tabindex="-1">
+      <h3 id="doneTitle">Solicitud recibida</h3>
+      <p id="doneText"></p>
+      <button class="btn btn-ink" type="button" id="doneAgain">Hacer otra solicitud</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec on-paper" id="preguntas" aria-labelledby="h-faq">
+  <div class="wrap faq-grid">
+    <div>
+      <h2 id="h-faq">Preguntas frecuentes</h2>
+      <p class="lead">Si tu duda no está aquí, escríbenos y te contestamos el mismo día.</p>
+    </div>
+    <div>
+      <details><summary>¿Cuánto cuesta un tatuaje?</summary><p>Depende del tamaño, el estilo y la zona. Un flash pequeño sale desde 60 €. En la calculadora tienes un precio orientativo y, después de la consulta, te damos el precio cerrado.</p></details>
+      <details><summary>¿Duele mucho?</summary><p>Depende de la zona. Antebrazo, brazo y muslo suelen ser los más llevaderos. Costillas, cuello y pies duelen más. En la calculadora verás el nivel de cada zona.</p></details>
+      <details><summary>¿Hay que dejar señal?</summary><p>Sí, 30 €, que se descuentan del precio final. Si necesitas cambiar el día, avísanos con 48 horas y la señal vale para la nueva fecha.</p></details>
+      <details><summary>¿Puedo traer mi propio diseño?</summary><p>Claro. Tráenos tus referencias y las adaptamos a tu cuerpo. No copiamos tatuajes de otros artistas: creamos algo parecido pero tuyo.</p></details>
+      <details><summary>¿Cuánto tarda en curar?</summary><p>La piel cierra en unas dos semanas y el color se asienta del todo en un mes. En la sección de cuidados puedes ver qué hacer cada día.</p></details>
+      <details><summary>¿Tapáis tatuajes antiguos?</summary><p>Muchas veces sí. Enséñanos el tatuaje en la consulta y te decimos con honestidad qué se puede hacer y qué no.</p></details>
+      <details><summary>¿Qué edad hay que tener?</summary><p>18 años. Los menores solo pueden tatuarse acompañados de su madre, padre o tutor legal y con su autorización firmada.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="sec on-ink" id="visitanos" aria-labelledby="h-visit">
+  <div class="wrap visit">
+    <div>
+      <h2 id="h-visit">Ven a vernos</h2>
+      <address class="addr">Calle Ejemplo 14<br>28004 Madrid</address>
+      <table class="hours" id="hours">
+        <caption class="sr">Horario del estudio</caption>
+        <tbody>
+          <tr data-d="1"><th scope="row">Lunes</th><td>Cerrado</td></tr>
+          <tr data-d="2"><th scope="row">Martes</th><td>11:00 a 14:00 y 16:00 a 20:00</td></tr>
+          <tr data-d="3"><th scope="row">Miércoles</th><td>11:00 a 14:00 y 16:00 a 20:00</td></tr>
+          <tr data-d="4"><th scope="row">Jueves</th><td>11:00 a 14:00 y 16:00 a 20:00 (flash sin cita por la tarde)</td></tr>
+          <tr data-d="5"><th scope="row">Viernes</th><td>11:00 a 14:00 y 16:00 a 20:00</td></tr>
+          <tr data-d="6"><th scope="row">Sábado</th><td>11:00 a 14:00 y 16:00 a 20:00 (flash sin cita por la tarde)</td></tr>
+          <tr data-d="0"><th scope="row">Domingo</th><td>Cerrado</td></tr>
+        </tbody>
+      </table>
+      <div class="visit-act">
+        <a class="btn btn-yellow" href="https://www.google.com/maps/search/?api=1&query=Puerta+del+Sol,+Madrid" target="_blank" rel="noopener">Cómo llegar</a>
+        <button class="btn btn-paper" type="button" id="copyAddr">Copiar dirección</button>
+        <a class="btn btn-paper" href="https://www.instagram.com/kamyar._.sh/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="visit-photo">
+      <img src="https://images.unsplash.com/photo-1516008684536-605574d804ce?w=900&h=1000&q=78&auto=format&fit=crop" alt="Cartel de neón con la palabra tattoo encendido de noche" width="900" height="1000" loading="lazy" />
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-word" aria-hidden="true">Ancla</p>
+    <nav class="foot-links" aria-label="Pie de página">
+      <a href="#flash">Flash</a><a href="#estilos">Estilos</a><a href="#tu-tatuaje">Tu tatuaje</a><a href="#artistas">Artistas</a><a href="#cuidados">Cuidados</a><a href="#reserva">Pedir cita</a>
+    </nav>
+    <p class="demo-disclaimer">Diseño de ejemplo. El nombre, la dirección, los precios, las reseñas y los datos de contacto o certificaciones que aparecen son ficticios y solo sirven de muestra.</p>
+  </div>
+</footer>
+
+<div class="pbar" id="pbar" role="region" aria-label="Tu cita">
+  <p id="pbarText"></p>
+  <button class="x" type="button" id="pbarClear">Quitar</button>
+  <a class="btn btn-red" href="#reserva" id="pbarGo">Pedir cita</a>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- Toast ---------- */
+var toastEl=$('#toast'),toastT;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){toastEl.classList.remove('show')},2600)}
+
+/* ---------- Mobile menu ---------- */
+var nav=$('#nav'),burger=$('#burger');
+burger.addEventListener('click',function(){var o=nav.classList.toggle('open');burger.setAttribute('aria-expanded',o?'true':'false');burger.textContent=o?'Cerrar':'Menú'});
+$$('#nav a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.textContent='Menú'})});
+
+/* ---------- Opening hours (Madrid time) ---------- */
+var DAYN=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+function madridNow(){
+  try{
+    var p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Madrid',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date());
+    var o={};p.forEach(function(x){o[x.type]=x.value});
+    var map={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+    return {d:map[o.weekday],m:(parseInt(o.hour,10)%24)*60+parseInt(o.minute,10)};
+  }catch(e){var n=new Date();return {d:n.getDay(),m:n.getHours()*60+n.getMinutes()}}
+}
+function hoursState(){
+  var n=madridNow(),open=n.d>=2&&n.d<=6;
+  var blocks=[[660,840],[960,1200]];
+  var dot=$('#openNow .dot'),txt=$('#openNowText');
+  $$('#hours tr').forEach(function(tr){tr.classList.toggle('today-row',parseInt(tr.getAttribute('data-d'),10)===n.d)});
+  function hm(m){return (m<600?'0':'')+Math.floor(m/60)+':'+(m%60<10?'0':'')+(m%60)}
+  if(open){
+    for(var i=0;i<blocks.length;i++){
+      if(n.m>=blocks[i][0]&&n.m<blocks[i][1]){dot.classList.remove('off');txt.textContent='Abierto ahora, hasta las '+hm(blocks[i][1]);return}
+      if(n.m<blocks[i][0]){dot.classList.add('off');txt.textContent='Cerrado ahora. Abrimos hoy a las '+hm(blocks[i][0]);return}
+    }
+  }
+  dot.classList.add('off');
+  var nd=(n.d+1)%7,k=0;
+  while((nd<2||nd>6)&&k<7){nd=(nd+1)%7;k++}
+  var when=(nd===(n.d+1)%7)?'mañana':'el '+DAYN[nd];
+  txt.textContent='Cerrado ahora. Abrimos '+when+' a las 11:00';
+}
+hoursState();setInterval(hoursState,60000);
+
+/* ---------- Data ---------- */
+var STY={
+  fina:{n:'Línea fina',min:70,rate:9,spd:.10},
+  trad:{n:'Tradicional',min:80,rate:11,spd:.14},
+  black:{n:'Blackwork',min:90,rate:12,spd:.16},
+  lett:{n:'Lettering',min:60,rate:8,spd:.08},
+  ilus:{n:'Ilustrativo',min:110,rate:15,spd:.20}
+};
+var ZON={
+  antebrazo:{n:'Antebrazo',pain:2,mult:1,heal:'2 a 3 semanas',note:''},
+  brazo:{n:'Brazo',pain:2,mult:1,heal:'2 a 3 semanas',note:''},
+  hombro:{n:'Hombro',pain:2,mult:1,heal:'2 a 3 semanas',note:''},
+  espalda:{n:'Espalda',pain:3,mult:1.05,heal:'2 a 3 semanas',note:'Espacio de sobra para piezas grandes. Te ayudamos a colocar la plantilla.'},
+  muslo:{n:'Muslo',pain:2,mult:1.05,heal:'3 semanas',note:''},
+  gemelo:{n:'Gemelo',pain:3,mult:1,heal:'3 semanas',note:''},
+  costillas:{n:'Costillas',pain:5,mult:1.15,heal:'3 a 4 semanas',note:'Zona sensible: hacemos pausas cuando las necesites.'},
+  tobillo:{n:'Tobillo',pain:4,mult:1.1,heal:'3 a 4 semanas',note:'El roce del calzado puede pedir un retoque. Es gratis.'},
+  mano:{n:'Mano',pain:4,mult:1.2,heal:'3 a 4 semanas',note:'La piel de las manos se renueva rápido: puede necesitar un retoque.'},
+  cuello:{n:'Cuello',pain:4,mult:1.15,heal:'3 semanas',note:'Zona muy visible: te ayudamos a elegir bien la posición.'}
+};
+var PAINL=['','Muy suave','Suave','Medio','Alto','Muy alto'];
+
+/* ---------- Project state ---------- */
+var P={type:'flash',flash:null,custom:null,artist:'Cualquiera'};
+var planner={style:'fina',zone:'antebrazo',cm:10};
+function r5(x){return Math.round(x/5)*5}
+function calc(){
+  var s=STY[planner.style],z=ZON[planner.zone];
+  var raw=(s.min+Math.max(0,planner.cm-4)*s.rate)*z.mult;
+  var h=.5+planner.cm*s.spd;
+  h=Math.round(h*4)/4;
+  return {lo:r5(raw*.9),hi:r5(raw*1.15),h:h,sess:Math.max(1,Math.ceil(h/4))};
+}
+function fmtH(h){var t=Math.round(h*60),H=Math.floor(t/60),M=t%60;return (H?H+' h':'')+(H&&M?' ':'')+(M?M+' min':'')}
+function summary(){
+  var a=P.artist!=='Cualquiera'?', con '+P.artist:'';
+  if(P.type==='flash'){
+    return P.flash?('Flash: '+P.flash.name+' ('+P.flash.size+'), '+P.flash.price+' €'+a):'Un flash. Elige uno en la pared de arriba'+a+'.';
+  }
+  if(P.type==='custom'){
+    if(P.custom){var c=P.custom;return 'Diseño propio: '+c.style.toLowerCase()+', '+c.zone.toLowerCase()+', '+c.cm+' cm, '+c.lo+' a '+c.hi+' €'+a}
+    return 'Diseño propio. Calcula tu tatuaje para añadir tamaño y zona'+a+'.';
+  }
+  return 'Consulta gratis de 20 minutos'+a+'.';
+}
+var idea=$('#fIdea');
+idea.addEventListener('input',function(){idea.setAttribute('data-touched','1')});
+function syncIdea(){
+  if(idea.getAttribute('data-touched')==='1')return;
+  var t='';
+  if(P.type==='flash'&&P.flash)t='Quiero el flash "'+P.flash.name+'" ('+P.flash.size+').';
+  if(P.type==='custom'&&P.custom)t='Tatuaje de estilo '+P.custom.style.toLowerCase()+' en '+P.custom.zone.toLowerCase()+', unos '+P.custom.cm+' cm. ';
+  idea.value=t;
+}
+function syncAll(){
+  $('#briefText').textContent=(P.flash||P.custom||P.type==='consulta')?summary():'Todavía no has elegido nada. Puedes apuntarte a un flash, calcular tu tatuaje o pedir una consulta gratis.';
+  var has=(P.type==='flash'&&P.flash)||(P.type==='custom'&&P.custom);
+  var bar=$('#pbar');
+  bar.classList.toggle('show',!!has);
+  document.body.classList.toggle('has-pbar',!!has);
+  if(has){$('#pbarText').innerHTML='<strong>Tu cita</strong>'+summary().replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  $$('#fType .chip').forEach(function(c){c.setAttribute('aria-checked',c.getAttribute('data-v')===P.type?'true':'false')});
+  $$('.flash').forEach(function(f){var on=!!(P.flash&&P.type==='flash'&&f.getAttribute('data-key')===P.flash.key);f.classList.toggle('picked',on);var b=$('button',f);b.setAttribute('aria-pressed',on?'true':'false');b.textContent=on?'En tu cita. Quitar':'Apuntarme a este flash'});
+  $('#fArtist').value=P.artist;
+  syncIdea();
+}
+
+/* ---------- Flash wall ---------- */
+$$('.flash').forEach(function(f){
+  $('button',f).addEventListener('click',function(){
+    var key=f.getAttribute('data-key');
+    if(P.flash&&P.flash.key===key&&P.type==='flash'){P.flash=null;idea.setAttribute('data-touched','');syncAll();return}
+    P.flash={key:key,name:f.getAttribute('data-name'),price:f.getAttribute('data-price'),size:f.getAttribute('data-size')};
+    P.type='flash';idea.setAttribute('data-touched','');syncAll();
+    toast('Apuntado: '+P.flash.name);
+  });
+});
+if('IntersectionObserver' in window&&!reduce){
+  document.documentElement.classList.add('js-anim');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  $$('.flash').forEach(function(f){io.observe(f)});
+}
+
+/* ---------- Style tabs ---------- */
+var SV={
+  fina:{img:'1562962230-16e4623d36e6',alt:'Antebrazo con una peonía tatuada en línea fina',text:'Trazos delgados y detalles pequeños: flores, letras, símbolos. Queda elegante en tamaños pequeños.',f:'Primeros tatuajes, muñeca, antebrazo y tobillo.',c:'Protégelo del sol: la línea fina se desdibuja antes si se quema.',w:'Lucía'},
+  trad:{img:'1479767574301-a01c78234a0c',alt:'Brazo con un tatuaje tradicional con cinta y letras en tonos naranjas',text:'Contorno grueso y colores planos: anclas, rosas, corazones y cintas. Es el estilo que mejor envejece.',f:'Piezas que se vean de lejos: brazo, pierna y pecho.',c:'Pide poco: hidratación y protector solar, y aguanta décadas.',w:'Marcos'},
+  black:{img:'1611501275019-9b5cda994e8d',alt:'Brazo y torso con una manga de blackwork de mucho contraste',text:'Negro sólido, contraste fuerte y composiciones grandes: mangas, geométricos y piezas que cubren.',f:'Mangas, espalda y tapar tatuajes antiguos.',c:'El negro sólido tarda algo más en curar. No tengas prisa por rascarte.',w:'Inés'},
+  lett:{img:'1666735660740-1753179a2dc4',alt:'Muñeca con una palabra tatuada en letra pequeña',text:'Frases, nombres y fechas con letra dibujada a medida, no sacada de un ordenador.',f:'Muñeca, clavícula, costillas y tobillo.',c:'No lo hagas demasiado pequeño: las letras necesitan espacio para no juntarse con los años.',w:'Lucía'},
+  ilus:{img:'1598371839696-5c5bb00bdc28',alt:'Hombro con un tatuaje ilustrativo de un dragón y flores en negro y gris',text:'Dibujos con sombra y detalle, como un grabado: animales, flores y figuras.',f:'Hombro, muslo, gemelo y espalda.',c:'Las piezas grandes se hacen en varias sesiones: deja curar bien entre una y otra.',w:'Inés y Marcos'}
+};
+var tabs=$$('#styleTabs .tab'),curStyle='fina';
+function setStyleTab(k,focus){
+  curStyle=k;
+  tabs.forEach(function(t){var on=t.getAttribute('data-s')===k;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;if(on&&focus)t.focus()});
+  var d=SV[k];
+  var img=$('#svImg');img.src='https://images.unsplash.com/photo-'+d.img+'?w=900&h=900&q=78&auto=format&fit=crop';img.alt=d.alt;
+  $('#svName').textContent=STY[k].n;$('#svText').textContent=d.text;$('#svFor').textContent=d.f;$('#svCare').textContent=d.c;$('#svWho').textContent=d.w;
+}
+tabs.forEach(function(t,i){
+  t.addEventListener('click',function(){setStyleTab(t.getAttribute('data-s'))});
+  t.addEventListener('keydown',function(e){
+    var n=-1;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')n=(i+1)%tabs.length;
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')n=(i+tabs.length-1)%tabs.length;
+    if(n>-1){e.preventDefault();setStyleTab(tabs[n].getAttribute('data-s'),true)}
+  });
+});
+$('#svGo').addEventListener('click',function(){planner.style=curStyle;renderPlanner()});
+
+/* ---------- Planner ---------- */
+function chip(html,pressed,attrs){var b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('role','radio');b.setAttribute('aria-checked',pressed?'true':'false');b.textContent=html;Object.keys(attrs||{}).forEach(function(k){b.setAttribute(k,attrs[k])});return b}
+var pStyle=$('#pStyle'),pZone=$('#pZone');
+Object.keys(STY).forEach(function(k){var b=chip(STY[k].n,k===planner.style,{'data-k':k});b.addEventListener('click',function(){planner.style=k;renderPlanner()});pStyle.appendChild(b)});
+Object.keys(ZON).forEach(function(k){var b=chip(ZON[k].n,k===planner.zone,{'data-k':k});b.addEventListener('click',function(){planner.zone=k;renderPlanner()});pZone.appendChild(b)});
+var size=$('#pSize');
+size.addEventListener('input',function(){planner.cm=parseInt(size.value,10);renderPlanner()});
+var REFS=[{id:'Mobile',w:14.7,t:'Un móvil'},{id:'Card',w:8.6,t:'Una tarjeta de crédito'},{id:'Coin',w:2.5,t:'Una moneda de 2 €'}];
+function nfmt(n){return String(n).replace('.',',')}
+function renderPlanner(){
+  $$('#pStyle .chip').forEach(function(c){c.setAttribute('aria-checked',c.getAttribute('data-k')===planner.style?'true':'false')});
+  $$('#pZone .chip').forEach(function(c){c.setAttribute('aria-checked',c.getAttribute('data-k')===planner.zone?'true':'false')});
+  size.value=planner.cm;$('#pSizeOut').textContent=planner.cm;
+  var c=calc(),z=ZON[planner.zone],s=STY[planner.style];
+  $('#tkPrice').textContent=c.lo+' a '+c.hi+' €';
+  $('#tkStyle').textContent=s.n;$('#tkZone').textContent=z.n;$('#tkSize').textContent=planner.cm+' cm';
+  $('#tkTime').textContent=fmtH(c.h);$('#tkSess').textContent=c.sess+(c.sess>1?' sesiones':' sesión');
+  var pain='<span class="pain" aria-hidden="true">';for(var i=1;i<=5;i++)pain+='<i'+(i<=z.pain?' class="on"':'')+'></i>';
+  $('#tkPain').innerHTML=pain+'</span>'+PAINL[z.pain];
+  $('#tkHeal').textContent=z.heal;$('#tkNote').textContent=z.note;
+  /* scale bars: widths are to scale over 32 cm */
+  document.getElementById('rTat').style.width=(planner.cm/32*100)+'%';
+  document.getElementById('lTat').textContent='Tu tatuaje, '+planner.cm+' cm de ancho';
+  REFS.forEach(function(r){document.getElementById('r'+r.id).style.width=(r.w/32*100)+'%';document.getElementById('l'+r.id).textContent=r.t+', '+nfmt(r.w)+' cm'});
+  var cm=planner.cm,rel;
+  if(cm<2.5)rel='más pequeño que una moneda de 2 €';
+  else if(cm<8.6)rel='más grande que una moneda de 2 € (2,5 cm)';
+  else if(cm<14.7)rel='más grande que una tarjeta de crédito (8,6 cm)';
+  else if(cm<20)rel='más grande que un móvil (14,7 cm)';
+  else rel='más largo que un móvil: una pieza de medio brazo o más';
+  $('#scaleCap').textContent=cm+' cm es '+rel+'. Los anchos están a escala.';
+}
+$('#tkAdd').addEventListener('click',function(){
+  var c=calc();
+  P.custom={style:STY[planner.style].n,zone:ZON[planner.zone].n,cm:planner.cm,lo:c.lo,hi:c.hi};
+  P.type='custom';idea.setAttribute('data-touched','');syncAll();
+  toast('Añadido a tu cita');
+});
+
+/* ---------- Care timeline ---------- */
+var CARE=[
+  {n:'El día del tatuaje',chip:'Día 0',from:0,go:0,d:['Deja la protección que te pongamos entre 2 y 4 horas.','Lávate las manos antes de tocarlo.','Bebe agua y descansa.'],x:['No te quites la protección antes de tiempo.','No te bañes ni vayas a la piscina.','No lo expongas al sol.']},
+  {n:'Rojo y sensible',chip:'Días 1 a 3',from:1,go:2,d:['Lávalo dos veces al día con agua tibia y jabón neutro.','Sécalo a toquecitos con papel limpio.','Pon una capa muy fina de crema cicatrizante.'],x:['No lo frotes con esponja.','No uses ropa apretada encima.','No pongas crema de más: la piel tiene que respirar.']},
+  {n:'Picor y piel que se pela',chip:'Días 4 a 14',from:4,go:8,d:['Hidrátalo con una crema sin perfume.','Si pica, dale golpecitos suaves con la mano.','Usa ropa holgada de algodón.'],x:['No te rasques ni arranques las costras.','No te bañes en piscina ni en el mar.','No uses cremas con alcohol.']},
+  {n:'Piel mate, ya casi',chip:'Días 15 a 29',from:15,go:22,d:['Sigue hidratando una vez al día.','Usa protector solar 50 si le da el sol.','Si ves zonas claras, pide el retoque gratis.'],x:['No tomes el sol sin protección.','No uses exfoliantes fuertes.','No te asustes si se ve apagado: es una capa fina de piel que se va.']},
+  {n:'Curado y listo para lucir',chip:'Día 30',from:30,go:30,d:['Trátalo como el resto de tu piel.','Ponle protector solar siempre: es lo que más lo cuida con los años.','Reserva la revisión de los dos meses.'],x:['No lo dejes quemarse en verano.','No esperes años para retocarlo si algo se ha ido.']}
+];
+var careRange=$('#careRange'),careChips=$('#careChips');
+CARE.forEach(function(ph,i){var b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('aria-pressed','false');b.textContent=ph.chip;b.addEventListener('click',function(){careRange.value=ph.go;renderCare()});careChips.appendChild(b)});
+function renderCare(){
+  var d=parseInt(careRange.value,10),idx=0;
+  CARE.forEach(function(ph,i){if(d>=ph.from)idx=i});
+  var ph=CARE[idx];
+  $('#careDay').textContent='Día '+d;$('#carePhase').textContent=ph.n;
+  $('#careDo').innerHTML=ph.d.map(function(t){return '<li>'+t+'</li>'}).join('');
+  $('#careDont').innerHTML=ph.x.map(function(t){return '<li>'+t+'</li>'}).join('');
+  $$('#careChips .chip').forEach(function(c,i){c.setAttribute('aria-pressed',i===idx?'true':'false')});
+  careRange.setAttribute('aria-valuetext','Día '+d+', '+ph.n);
+}
+careRange.addEventListener('input',renderCare);
+
+/* ---------- Booking ---------- */
+var chosenDay=null,chosenTime=null;
+var MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+var DAB=['dom','lun','mar','mié','jue','vie','sáb'];
+var daysEl=$('#fDays'),timesEl=$('#fTimes');
+(function buildDays(){
+  var base=new Date();
+  for(var i=1;i<=8;i++){
+    var d=new Date(base.getFullYear(),base.getMonth(),base.getDate()+i);
+    var closed=d.getDay()<2;
+    var b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('role','radio');b.setAttribute('aria-checked','false');
+    b.setAttribute('data-label',DAB[d.getDay()]+' '+d.getDate()+' de '+MES[d.getMonth()]);
+    b.innerHTML='<small>'+DAB[d.getDay()]+'</small><b>'+d.getDate()+'</b><small>'+MES[d.getMonth()]+'</small>';
+    if(closed){b.setAttribute('aria-disabled','true');b.setAttribute('aria-label',DAB[d.getDay()]+' '+d.getDate()+', cerrado')}
+    (function(btn,closedDay){btn.addEventListener('click',function(){
+      if(closedDay)return;
+      chosenDay=btn.getAttribute('data-label');
+      $$('#fDays .chip').forEach(function(c){c.setAttribute('aria-checked',c===btn?'true':'false')});
+      $('#fErr').textContent='';
+    })})(b,closed);
+    daysEl.appendChild(b);
+  }
+  ['11:00','12:30','16:00','17:00','18:00','19:00'].forEach(function(t){
+    var b=document.createElement('button');b.type='button';b.className='chip';b.setAttribute('role','radio');b.setAttribute('aria-checked','false');b.textContent=t;
+    b.addEventListener('click',function(){chosenTime=t;$$('#fTimes .chip').forEach(function(c){c.setAttribute('aria-checked',c===b?'true':'false')});$('#fErr').textContent=''});
+    timesEl.appendChild(b);
+  });
+})();
+$$('#fType .chip').forEach(function(c){c.addEventListener('click',function(){P.type=c.getAttribute('data-v');idea.setAttribute('data-touched','');syncAll()})});
+$('#fArtist').addEventListener('change',function(e){P.artist=e.target.value;syncAll()});
+$$('.js-pick-artist').forEach(function(b){b.addEventListener('click',function(){
+  P.artist=b.getAttribute('data-artist');syncAll();
+  var r=$('#reserva');r.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+  toast('Artista elegido: '+P.artist);
+})});
+$('#pbarClear').addEventListener('click',function(){P.flash=null;P.custom=null;P.type='flash';idea.setAttribute('data-touched','');idea.value='';syncAll()});
+$('#fFiles').addEventListener('change',function(e){
+  var names=Array.prototype.map.call(e.target.files,function(f){return f.name});
+  $('#fFilesList').textContent=names.length?names.join(', '):'';
+});
+$('#form').addEventListener('submit',function(e){
+  e.preventDefault();
+  var name=$('#fName').value.trim(),phone=$('#fPhone').value.replace(/\D/g,''),err=$('#fErr');
+  var msg='';
+  if(name.length<2){msg='Escribe tu nombre.';$('#fName').focus()}
+  else if(phone.length<9){msg='Escribe un teléfono de 9 cifras.';$('#fPhone').focus()}
+  else if(!chosenDay){msg='Elige un día.'}
+  else if(!chosenTime){msg='Elige una hora.'}
+  else if(!$('#fAge').checked){msg='Confirma que tienes 18 años o más.';$('#fAge').focus()}
+  if(msg){err.textContent=msg;return}
+  err.textContent='';
+  var tipo={flash:'tu flash',custom:'tu diseño propio',consulta:'tu consulta gratis'}[P.type];
+  var art=P.artist==='Cualquiera'?'con el artista que mejor encaje contigo':'con '+P.artist;
+  $('#doneTitle').textContent='Solicitud recibida, '+name.split(' ')[0];
+  $('#doneText').textContent='Hemos anotado '+tipo+' '+art+' para el '+chosenDay+' a las '+chosenTime+'. Te escribiremos al '+$('#fPhone').value.trim()+' para confirmar y explicarte cómo dejar la señal de 30 €. Esto es un ejemplo: no se ha enviado nada.';
+  $('#form').hidden=true;$('#done').hidden=false;$('#done').focus();
+});
+$('#doneAgain').addEventListener('click',function(){$('#done').hidden=true;$('#form').hidden=false;$('#form').scrollIntoView({block:'start'})});
+
+/* ---------- Call + copy ---------- */
+var coarse=window.matchMedia&&window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+function copyText(t,ok){
+  function done(){toast(ok)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){fallback()})}else fallback();
+  function fallback(){var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){toast('No se pudo copiar')}document.body.removeChild(ta)}
+}
+$$('.js-call').forEach(function(a){
+  if(!coarse){a.removeAttribute('href');a.setAttribute('role','text');var cp=a.parentNode.querySelector('.js-copy-num');if(cp){cp.hidden=false;cp.addEventListener('click',function(){copyText(a.getAttribute('data-number'),'Número copiado')})}}
+});
+$('#copyAddr').addEventListener('click',function(){copyText('Calle Ejemplo 14, 28004 Madrid','Dirección copiada')});
+
+/* ---------- Init: sync all initial state ---------- */
+setStyleTab('fina');
+renderPlanner();
+renderCare();
+syncAll();
+})();
+</script>
+</body>
+</html>
